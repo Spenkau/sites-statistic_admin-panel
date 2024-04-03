@@ -12,9 +12,6 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Главная') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('api-point.index')" :active="request()->routeIs('api-point')">
-                        {{ __('API') }}
-                    </x-nav-link>
                 </div>
             </div>
 
