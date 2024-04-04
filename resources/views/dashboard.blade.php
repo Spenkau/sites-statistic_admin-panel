@@ -9,6 +9,6 @@
     <div class="container">
         <h1>Что можете сделать:</h1>
 
-{{--        <a href="{{ route('admin.create-user') }}">Создать пользователей</a>--}}
+        <a href="{{ route('user.index') }}">Управление пользователями</a>
     </div>
 </x-app-layout>

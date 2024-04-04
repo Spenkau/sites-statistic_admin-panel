@@ -3,8 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RolesEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -51,8 +53,32 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
-    public function isAdmin(): int
+    public function isAdmin(): RolesEnum
     {
-        return $this->roles()->first()->pivot->role_id;
+        return RolesEnum::from($this->roles()->first()->pivot->role_id);
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function personalSites(): HasMany
+    {
+        return $this->hasMany(Site::class);
+    }
+
+    public function publicSites(string|array $relations = []): BelongsToMany
+    {
+        return $this->belongsToMany(Site::class, 'site_user')
+            ->with($relations);
+    }
+
+    public function siteNotifications(int $siteId)
+    {
+        return $this->belongsToMany(Site::class, 'site_user')
+            ->where('site_id', $siteId)
+            ->withPivot($this->notificationsPivot)
+            ->first();
     }
 }

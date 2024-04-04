@@ -18,9 +18,17 @@
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
 
 @if (session('status') == 'not-admin')
-    <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+    <div class="session-msg border border-3 border-danger text-black bg-white absolute px-3 my-4 rounded-lg" style="left: 50%; transform: translateX(-50%); margin-top: 20px; border: 2px solid red">
         {{ __('Ошибка авторизации данного пользователя как администратора!') }}
     </div>
+
+    <script>
+        const message = document.querySelector('.session-msg');
+        setTimeout(() => {
+            message.parentNode.removeChild(message);
+        }, 5000)
+    </script>
+
 @endif
 
 <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
