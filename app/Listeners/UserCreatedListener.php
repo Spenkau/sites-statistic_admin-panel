@@ -17,6 +17,6 @@ class UserCreatedListener
 
         $roleEnum = $event->roleEnum;
 
-        $user->roles()->syncWithoutDetaching([$roleEnum]);
+        $user->roles()->sync([$roleEnum]);
     }
 }

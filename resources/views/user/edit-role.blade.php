@@ -4,18 +4,32 @@
             {{ __('Все пользователи') }}
         </h2>
     </x-slot>
-    <h1>{{ $user->name }}</h1>
-    <h1>{{ $user->email }}</h1>
+    <div class="container card w-50">
+        <div class="card-body d-flex justify-content-between">
+            <p>Пользователь {{ $user->name }}</p>
+            <p>{{ $user->email }}</p>
+        </div>
 
-    <form action="{{ route('user.update-role', $user->id) }}"></form>
-    <select name="" id="editRole">
-        <option disabled>Выбрать роль</option>
+        @if ($user->id == Auth::id() && $user->roles[0]->id == 2)
+            <div class="p-3 text-center">Вы, как администратор, не можете поменять свою роль!</div>
+        @else
+            <form method="post" action="{{ route('user.update-role', $user->id) }}">
+                @csrf
+                @method("PUT")
 
-        <option value="{{ \App\Enums\RolesEnum::USER }}">Пользователь</option>
-        <option value="{{ \App\Enums\RolesEnum::ADMIN }}">Админ</option>
-    </select>
+                <select name="role" id="select-role">
+                    <option
+                        value="{{ \App\Enums\RolesEnum::from($user->roles[0]->id) }}">{{ \App\Enums\RolesEnum::fromInt($user->roles[0]->id) }}</option>
+                    @foreach(\App\Enums\RolesEnum::cases() as $roleEnum)
+                        @if(strtolower($roleEnum->name) != $user->roles[0]->name)
+                            <option value="{{ $roleEnum->value }}">{{ $roleEnum->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
 
-    @foreach($user->personalSites as $number => $site)
-        <p>{{ $number + 1 }} {{ $site->name }}</p>
-    @endforeach
+                <button type="submit">Изменить</button>
+            </form>
+        @endif
+    </div>
+
 </x-app-layout>

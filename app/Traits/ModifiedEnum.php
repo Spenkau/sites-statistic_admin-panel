@@ -4,13 +4,12 @@ namespace App\Traits;
 
 trait ModifiedEnum
 {
-    public function caseName(string $caseName): false|int|string
+    public static function fromInt(int $value): string
     {
-        return array_search($caseName, $this::cases());
-    }
-
-    public function valueName(string $valueName): false|int|string
-    {
-        return array_search($valueName, $this::cases());
+        return match($value) {
+            1 => self::USER->name,
+            2 => self::ADMIN->name,
+            default => throw new \InvalidArgumentException("Invalid role value"),
+        };
     }
 }

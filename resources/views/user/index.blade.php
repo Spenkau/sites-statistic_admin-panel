@@ -4,8 +4,8 @@
             {{ __('Все пользователи') }}
         </h2>
     </x-slot>
-{{--    @dd($users)--}}
-    <div class="container">
+    {{--    @dd($users)--}}
+    <div id="users-list" class="container">
         @foreach($users as $user)
             <div class="card mb-3">
                 <div class="card-body d-flex align-items-center justify-content-between">
@@ -16,8 +16,12 @@
                     </div>
                     <div>
                         <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary btn-sm">Подробнее</a>
-                        <a href="{{ route('user.edit-role', $user->id) }}" class="btn btn-secondary btn-sm">Сменить роль</a>
-                        <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm">Удалить</a>
+                        <a
+                            href="{{ route('user.edit-role', $user->id) }}"
+                            class="btn btn-secondary btn-sm">
+                            Сменить роль
+                        </a>
+
                     </div>
                 </div>
             </div>

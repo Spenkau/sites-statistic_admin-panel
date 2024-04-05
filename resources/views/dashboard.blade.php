@@ -9,6 +9,16 @@
     <div class="container">
         <h1>Что можете сделать:</h1>
 
-        <a href="{{ route('user.index') }}">Управление пользователями</a>
+        <div class="container">
+            <form method="post" action="{{ route('admin.check-site') }}" class="btn btn-danger">
+                @csrf
+                @method("POST")
+                <button type="submit">Запустить проверку сайтов</button>
+            </form>
+            <a href="{{ route('admin.check-api') }}" class="btn btn-danger">Запустить проверку API</a>
+            <a href="{{ route('user.index') }}" class="btn btn-primary">Управление пользователями</a>
+            <a href="{{ route('admin.edit-config', ['config-type' => 'preprod']) }}" class="btn btn-primary">API Preprod config</a>
+            <a href="{{ route('admin.edit-config', ['config-type' => 'processing']) }}" class="btn btn-primary">API Processing config</a>
+        </div>
     </div>
 </x-app-layout>
