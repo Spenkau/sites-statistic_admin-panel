@@ -16,9 +16,10 @@
                 <button type="submit">Запустить проверку сайтов</button>
             </form>
             <a href="{{ route('admin.check-api') }}" class="btn btn-danger">Запустить проверку API</a>
+            <a href="{{ route('api-point.index') }}" class="btn btn-primary">Статистика API</a>
             <a href="{{ route('user.index') }}" class="btn btn-primary">Управление пользователями</a>
-            <a href="{{ route('admin.edit-config', ['config-type' => 'preprod']) }}" class="btn btn-primary">API Preprod config</a>
-            <a href="{{ route('admin.edit-config', ['config-type' => 'processing']) }}" class="btn btn-primary">API Processing config</a>
+            <a href="{{ route('service.index') }}" class="btn btn-primary">API Preprod config</a>
+{{--            <a href="{{ route('admin.service', ['config-type' => 'processing']) }}" class="btn btn-primary">API Processing config</a>--}}
         </div>
     </div>
 </x-app-layout>

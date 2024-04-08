@@ -625,18 +625,21 @@ return [
             'method' => 'GET',
             'query_params' => [],
             'response' => [
-                'error' => false,
-                'code' => 0,
-                'data' => [
-                    [
-                        'id' => 1,
-                        'name' => 'certificate'
-                    ],
-                    [
-                        'id' => 2,
-                        'name' => 'adventure'
+                'success' => [
+                    'error' => false,
+                    'code' => 0,
+                    'data' => [
+                        [
+                            'id' => 1,
+                            'name' => 'certificate'
+                        ],
+                        [
+                            'id' => 2,
+                            'name' => 'adventure'
+                        ]
                     ]
-                ]
+                ],
+                'error' => ['error' => true, 'code' => 11]
             ]
         ]
     ],
@@ -701,7 +704,7 @@ return [
                         ]
                     ]
                 ],
-                'error' => ['error', 'code']
+                'error' => ['error' => true, 'code' => 11]
             ]
         ]
     ],
@@ -743,12 +746,12 @@ return [
                                 ]
                             ]
                         ],
-                        'error' => [
-                            'error' => true,
-                            'code' => 11
-                        ]
                     ]
                 ],
+                'error' => [
+                    'error' => true,
+                    'code' => 11
+                ]
             ],
         ]
     ],
